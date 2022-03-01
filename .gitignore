@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+/back/BooksAPIRest/.vs
+/back/BooksAPIRest/BooksAPIRest/bin/Debug/net5.0
+/back/BooksAPIRest/BooksAPIRest/obj
