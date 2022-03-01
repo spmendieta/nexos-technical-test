@@ -12,9 +12,7 @@ Para ejecutar el proyecto en modo desarrollo usar: npm start o npm run start
 Extraer la solución y ejecutar por medio de Visual Studio
 
 # [Backend-BD] - database
-
-Dejo un respaldo de la base de datos que puede ser restaurada con facilidad por medio de SQL Server Managament Studio por medio de la opción Databases > Restore Database.
-Este respaldo puede ser encontrado en la ruta "support\database".
+Los scripts de creación de la base de datos y las tablas están en la carpeta "database\", sin embargo, también adjunto un respaldo de la base de datos que puede ser restaurada con facilidad por medio de SQL Server Managament Studio por medio de la opción Databases > Restore Database. Dicho respaldo puede ser encontrado en la ruta "support\database".
 
 
 
