@@ -3,56 +3,62 @@
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Orders</span>
-                    <div class="text-900 font-medium text-xl">152</div>
+                    <span class="block text-500 font-medium mb-3">Autores</span>
+                    <div class="text-900 font-medium text-xl">
+                        {{ (authors && authors.length) || "1+" }}
+                    </div>
                 </div>
                 <div
                     class="flex align-items-center justify-content-center bg-blue-100 border-round"
                     [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
                 >
-                    <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                    <i class="pi pi-user text-blue-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">24 new </span>
-            <span class="text-500">since last visit</span>
+            <span class="text-green-500 font-medium">1 nuevo </span>
+            <span class="text-500">desde la última visita</span>
         </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-3">
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Revenue</span>
-                    <div class="text-900 font-medium text-xl">$2.100</div>
+                    <span class="block text-500 font-medium mb-3"
+                        >Editoriales</span
+                    >
+                    <div class="text-900 font-medium text-xl">
+                        {{ (editorials && editorials.length) || "1+" }}
+                    </div>
                 </div>
                 <div
                     class="flex align-items-center justify-content-center bg-orange-100 border-round"
                     [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
                 >
-                    <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                    <i class="pi pi-home text-orange-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">%52+ </span>
-            <span class="text-500">since last week</span>
+            <span class="text-green-500 font-medium">1 más </span>
+            <span class="text-500">desde la última semana</span>
         </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-3">
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3"
-                        >Customers</span
-                    >
-                    <div class="text-900 font-medium text-xl">28441</div>
+                    <span class="block text-500 font-medium mb-3">Libros</span>
+                    <div class="text-900 font-medium text-xl">
+                        {{ (books && books.length) || "1+" }}
+                    </div>
                 </div>
                 <div
                     class="flex align-items-center justify-content-center bg-cyan-100 border-round"
                     [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
                 >
-                    <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                    <i class="pi pi-book text-cyan-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">520 </span>
-            <span class="text-500">newly registered</span>
+            <span class="text-green-500 font-medium">En catalogo </span>
+            <span class="text-500">, estado actual</span>
         </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-3">
@@ -60,19 +66,21 @@
             <div class="flex justify-content-between mb-3">
                 <div>
                     <span class="block text-500 font-medium mb-3"
-                        >Comments</span
+                        >Generos registrados</span
                     >
-                    <div class="text-900 font-medium text-xl">152 Unread</div>
+                    <div class="text-900 font-medium text-xl">
+                        {{ (genres && genres.length) || "1+" }}
+                    </div>
                 </div>
                 <div
                     class="flex align-items-center justify-content-center bg-purple-100 border-round"
                     [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
                 >
-                    <i class="pi pi-comment text-purple-500 text-xl"></i>
+                    <i class="pi pi-star text-purple-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">85 </span>
-            <span class="text-500">responded</span>
+            <span class="text-green-500 font-medium">Actualmente activos</span>
+            <span class="text-500"> y listos para asociar</span>
         </div>
     </div>
 
@@ -80,7 +88,7 @@
         <div class="card">
             <h5>Books</h5>
 
-            <p-toolbar styleClass="p-mb-4">
+            <!-- <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
                     <button
                         pButton
@@ -91,14 +99,14 @@
                         (click)="openNew()"
                     ></button>
                 </ng-template>
-            </p-toolbar>
+            </p-toolbar> -->
 
             <p-table
                 #dt
                 [value]="books"
                 [rows]="10"
                 [paginator]="true"
-                [globalFilterFields]="['title', 'editorialName', 'authorName']"
+                [globalFilterFields]="['title', 'editorialName', 'authorName', 'year']"
                 [rowHover]="true"
                 dataKey="bookId"
                 currentPageReportTemplate="Mostrando {first} / {last} de {totalRecords} registros"
@@ -170,127 +178,5 @@
                 </ng-template>
             </p-table>
         </div>
-
-        <!--Dialog begins-->
-        <p-dialog
-            [(visible)]="bookDialog"
-            [style]="{ width: '450px' }"
-            header="Product Details"
-            [modal]="true"
-            styleClass="p-fluid"
-        >
-            <ng-template pTemplate="content">
-                <div class="p-field">
-                    <label for="name">Name</label>
-                    <input
-                        type="text"
-                        pInputText
-                        id="name"
-                        [(ngModel)]="product.name"
-                        required
-                        autofocus
-                    />
-                    <small class="p-invalid" *ngIf="submitted && !product.name"
-                        >Name is required.</small
-                    >
-                </div>
-                <div class="p-field">
-                    <label for="description">Description</label>
-                    <textarea
-                        id="description"
-                        pInputTextarea
-                        [(ngModel)]="product.description"
-                        required
-                        rows="3"
-                        cols="20"
-                    ></textarea>
-                </div>
-
-                <div class="p-field">
-                    <label class="p-mb-3">Category</label>
-                    <div class="p-formgrid p-grid">
-                        <div class="p-field-radiobutton p-col-6">
-                            <p-radioButton
-                                id="category1"
-                                name="category"
-                                value="Accessories"
-                                [(ngModel)]="product.category"
-                            ></p-radioButton>
-                            <label for="category1">Accessories</label>
-                        </div>
-                        <div class="p-field-radiobutton p-col-6">
-                            <p-radioButton
-                                id="category2"
-                                name="category"
-                                value="Clothing"
-                                [(ngModel)]="product.category"
-                            ></p-radioButton>
-                            <label for="category2">Clothing</label>
-                        </div>
-                        <div class="p-field-radiobutton p-col-6">
-                            <p-radioButton
-                                id="category3"
-                                name="category"
-                                value="Electronics"
-                                [(ngModel)]="product.category"
-                            ></p-radioButton>
-                            <label for="category3">Electronics</label>
-                        </div>
-                        <div class="p-field-radiobutton p-col-6">
-                            <p-radioButton
-                                id="category4"
-                                name="category"
-                                value="Fitness"
-                                [(ngModel)]="product.category"
-                            ></p-radioButton>
-                            <label for="category4">Fitness</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-formgrid p-grid">
-                    <div class="p-field p-col">
-                        <label for="price">Price</label>
-                        <p-inputNumber
-                            id="price"
-                            [(ngModel)]="product.price"
-                            mode="currency"
-                            currency="USD"
-                            locale="en-US"
-                        ></p-inputNumber>
-                    </div>
-                    <div class="p-field p-col">
-                        <label for="quantity">Quantity</label>
-                        <p-inputNumber
-                            id="quantity"
-                            [(ngModel)]="product.quantity"
-                        ></p-inputNumber>
-                    </div>
-                </div>
-            </ng-template>
-
-            <ng-template pTemplate="footer">
-                <button
-                    pButton
-                    pRipple
-                    label="Cancel"
-                    icon="pi pi-times"
-                    class="p-button-text"
-                    (click)="hideDialog()"
-                ></button>
-                <button
-                    pButton
-                    pRipple
-                    label="Save"
-                    icon="pi pi-check"
-                    class="p-button-text"
-                    (click)="saveProduct()"
-                ></button>
-            </ng-template>
-        </p-dialog>
-
-        <!--Dialog ends-->
-
-        <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
     </div>
 </div>
